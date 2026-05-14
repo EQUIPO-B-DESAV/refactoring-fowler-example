@@ -51,15 +51,4 @@ public class Movie {
 	public String getTitle() {
 		return _title;
 	}
-
-	int getFrequentRenterPoints(Rental rental) {
-	
-		int points=0;
-		points++;
-		// add bonus for a two day new release rental
-		if ((getPriceCode() == Movie.NEW_RELEASE)
-				&& rental.getDaysRented() > 1)
-			points++;
-		return points;
-	}
 }

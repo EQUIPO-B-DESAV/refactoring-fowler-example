@@ -5,7 +5,7 @@ public class ChildrenPrice extends MoviePrice {
 		return Movie.CHILDRENS;
 	}
 	
-	public double getCharge(Movie movie, int daysRented) {
+	public double getCharge(int daysRented) {
 		
 		double thisAmount = 0;
 		
@@ -14,5 +14,13 @@ public class ChildrenPrice extends MoviePrice {
 			thisAmount += (daysRented - 3) * 1.5;
 		
 		return thisAmount;
+	}
+	
+	public int getFrequentRenterPoints(int daysRented) {
+	
+		int points=0;
+		points++;
+		
+		return points;
 	}
 }
