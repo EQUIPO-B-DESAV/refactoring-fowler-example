@@ -12,24 +12,40 @@ package ubu.gii.dass.refactoring;
  */
 
 public class Movie {
-	public static final int CHILDRENS = 2;
-	public static final int REGULAR = 0;
-	public static final int NEW_RELEASE = 1;
+	static final int CHILDRENS = 2;
+	static final int REGULAR = 0;
+	static final int NEW_RELEASE = 1;
 
 	private String _title;
-	private int _priceCode;
+	private MoviePrice moviePrice;
 
 	public Movie(String title, int priceCode) {
 		_title = title;
-		_priceCode = priceCode;
+		setPriceCode(priceCode);
 	}
 
 	public int getPriceCode() {
-		return _priceCode;
+		return moviePrice.getPriceCode();
 	}
 
 	public void setPriceCode(int arg) {
-		_priceCode = arg;
+		switch (arg) {
+		
+		case Movie.REGULAR:
+			moviePrice = new RegularPrice();
+			break;
+			
+		case Movie.NEW_RELEASE:
+			moviePrice = new NewReleasePrice();
+			break;
+			
+		case Movie.CHILDRENS:
+			moviePrice = new ChildrenPrice();
+			break;
+			
+		default:
+	        throw new IllegalArgumentException("Código de precio no válido");
+		}
 	}
 
 	public String getTitle() {
@@ -41,7 +57,7 @@ public class Movie {
 		int points=0;
 		points++;
 		// add bonus for a two day new release rental
-		if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE)
+		if ((getPriceCode() == Movie.NEW_RELEASE)
 				&& rental.getDaysRented() > 1)
 			points++;
 		return points;
